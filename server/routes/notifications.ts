@@ -74,6 +74,33 @@ export default function(router: IRouter) {
     }
   );
 
+  router.get(
+    {
+      path: `${REPORTING_NOTIFICATIONS_DASHBOARDS_API.GET_CONFIG}/{configId}`,
+      validate: {
+        params: schema.object({
+          configId: schema.string(),
+        }),
+      },
+    },
+    async (context, request, response) => {
+      // @ts-ignore
+      const client: ILegacyScopedClusterClient =
+        context.report_alerts_plugin.notificationsClient.asScoped(request);
+      try {
+        const resp = await client.callAsCurrentUser('notifications.getConfig', {
+          configId: request.params.configId,
+        });
+        return response.ok({ body: resp });
+      } catch (error) {
+        return response.custom({
+          statusCode: error.statusCode || 500,
+          body: error.message,
+        });
+      }
+    }
+  );
+
   // get event by id
   router.get(
     {
@@ -86,7 +113,7 @@ export default function(router: IRouter) {
     },
     async (context, request, response) => {
       // @ts-ignore
-      const client: ILegacyScopedClusterClient = context.reporting_plugin.notificationsClient.asScoped(
+      const client = context.reporting_plugin.notificationsClient.asScoped(
         request
       );
       try {
