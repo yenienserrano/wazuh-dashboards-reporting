@@ -42,7 +42,6 @@ export default function(router: IRouter) {
     },
     async (context, request, response) => {
       const config_type = joinRequestParams(request.query.config_type);
-      const feature_list = joinRequestParams(request.query.feature_list);
       const config_id_list = joinRequestParams(request.query.config_id_list);
       const query = request.query.query;
       // @ts-ignore
@@ -84,7 +83,7 @@ export default function(router: IRouter) {
     },
     async (context, request, response) => {
       // @ts-ignore
-      const client: ILegacyScopedClusterClient = context.report_alerts_plugin.notificationsClient.asScoped(
+      const client: ILegacyScopedClusterClient = context.reporting_plugin.notificationsClient.asScoped(
         request
       );
       try {
