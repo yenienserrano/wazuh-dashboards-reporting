@@ -97,6 +97,7 @@ export const addReportDefinitionsTableContent = (data: any) => {
   for (let index = 0; index < data.length; ++index) {
     let item = data[index];
     let reportDefinition = item._source.report_definition;
+    let reportNotification = reportDefinition.delivery;
     let reportParams = reportDefinition.report_params;
     let trigger = reportDefinition.trigger;
     let triggerParams = trigger.trigger_params;
@@ -113,6 +114,8 @@ export const addReportDefinitionsTableContent = (data: any) => {
           ? `\u2014`
           : triggerParams.schedule_type, // e.g. recurring, cron based
       status: reportDefinition.status,
+      notificationsEnabled:
+        reportNotification.configIds.length > 0 ? 'Enabled' : 'Disabled'
     };
     reportDefinitionsTableItems.push(reportDefinitionsTableEntry);
   }
