@@ -13,12 +13,10 @@ export const reportTableMockResponse = [
       query_url: 'test_query_url_value.com',
       report_definition: {
         delivery: {
-            title: "New report",
-            textDescription: "New report available to view",
-            htmlDescription: "<p>New report available to view</p>",
-            configIds: [
-                "VnOVQ5IBH5EsCNGPWgec"
-            ]
+          title: 'New report',
+          textDescription: 'New report available to view',
+          htmlDescription: '<p>New report available to view</p>',
+          configIds: ['VnOVQ5IBH5EsCNGPWgec'],
         },
         report_params: {
           report_name: 'Test report table response',
@@ -49,13 +47,11 @@ export const reportTableMockResponse = [
 
 export const mockReportsTableItems = [
   {
-    channel: [
-      "VnOVQ5IBH5EsCNGPWgec",
-    ],
+    channel: ['VnOVQ5IBH5EsCNGPWgec'],
     emailRecipients: undefined,
-    textDescription: "New report available to view",
-    htmldescription: "<p>New report available to view</p>",
-    title: "New report",
+    textDescription: 'New report available to view',
+    htmldescription: '<p>New report available to view</p>',
+    title: 'New report',
     id: '123456',
     reportName: 'Test report table response',
     type: 'On demand',
@@ -92,12 +88,10 @@ export const reportDefinitionsTableMockResponse = [
           },
         },
         delivery: {
-            title: "New report",
-            textDescription: "New report available to view",
-            htmlDescription: "<p>New report available to view</p>",
-            configIds: [
-                "VnOVQ5IBH5EsCNGPWgec"
-            ]
+          title: 'New report',
+          textDescription: 'New report available to view',
+          htmlDescription: '<p>New report available to view</p>',
+          configIds: ['VnOVQ5IBH5EsCNGPWgec'],
         },
         trigger: {
           trigger_type: 'Schedule',
@@ -126,7 +120,7 @@ export const reportDefinitionsTableMockContent = [
     type: 'Schedule',
     owner: '—',
     source: 'Dashboard',
-    notificationsEnabled: "Enabled",
+    notificationsEnabled: 'Enabled',
     baseUrl: 'test_base_url.com',
     lastUpdated: 1602713211007,
     details: 'Recurring',
