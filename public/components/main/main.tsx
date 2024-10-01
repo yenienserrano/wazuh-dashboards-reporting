@@ -245,7 +245,7 @@ export function Main(props) {
       .catch((error) => {
         console.log('error when fetching all reports: ', error);
         // permission denied error
-        if (error.body.statusCode === 403) {
+        if (error?.body?.statusCode === 403) {
           handleReportsTableErrorToast('permissions');
         } else {
           handleReportsTableErrorToast('API');
@@ -264,7 +264,7 @@ export function Main(props) {
       })
       .catch((error) => {
         console.log('error when fetching all report definitions: ', error);
-        if (error.body.statusCode === 403) {
+        if (error?.body?.statusCode === 403) {
           handleReportDefinitionsTableErrorToast('permissions');
         } else {
           handleReportDefinitionsTableErrorToast('API');
