@@ -1,6 +1,11 @@
 name: Test and Build OpenSearch Dashboards Reports
 
-on: [pull_request, push]
+on: [
+  pull_request, 
+  push,
+  workflow_dispatch, 
+  workflow_call
+]
 
 env:
   PLUGIN_NAME: reportsDashboards
