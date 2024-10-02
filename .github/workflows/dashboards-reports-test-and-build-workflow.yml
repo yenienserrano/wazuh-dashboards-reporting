@@ -57,9 +57,11 @@ jobs:
       - name: Get the plugin version
         run: |
           ls
+          ls ./OpenSearch-Dashboards
+          ls ./OpenSearch-Dashboards/plugins
           pwd
-          echo "version=$(jq -r '.wazuh.version' $(pwd)/wazuh-dashboards-reporting/package.json)" >> $GITHUB_ENV
-          echo "revision=$(jq -r '.wazuh.revision' $(pwd)/wazuh-dashboards-reporting/package.json)" >> $GITHUB_ENV
+          echo "version=$(jq -r '.wazuh.version' $(pwd)/OpenSearch-Dashboards/plugins/wazuh-dashboards-reporting/package.json)" >> $GITHUB_ENV
+          echo "revision=$(jq -r '.wazuh.revision' $(pwd)/OpenSearch-Dashboards/plugins/wazuh-dashboards-reporting/package.json)" >> $GITHUB_ENV
 
       - name: OpenSearch Dashboards Plugin Bootstrap and test
         uses: nick-fields/retry@v1
