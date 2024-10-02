@@ -54,6 +54,11 @@ jobs:
         with:	
           path: OpenSearch-Dashboards/plugins/${{ env.PLUGIN_NAME }}
 
+      - name: Get the plugin version
+        run: |
+          echo "version=$(jq -r '.wazuh.version' $(pwd)/wazuh-security-plugin/package.json)" >> $GITHUB_ENV
+          echo "revision=$(jq -r '.wazuh.revision' $(pwd)/wazuh-security-plugin/package.json)" >> $GITHUB_ENV
+
       - name: OpenSearch Dashboards Plugin Bootstrap and test
         uses: nick-fields/retry@v1
         with:
@@ -85,7 +90,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dashboards-reports-linux
-          path: ./OpenSearch-Dashboards/plugins/${{ env.PLUGIN_NAME }}/build/${{ env.ARTIFACT_NAME }}-${{ env.OPENSEARCH_PLUGIN_VERSION }}.zip
+          path: ./OpenSearch-Dashboards/plugins/${{ env.PLUGIN_NAME }}/build/reports-dashboards_${{ env.VERSION }}-${{ env.REVISION }}_${{ inputs.reference_report_plugins }}.zip
   
   # Commenting out windows and macos build jobs as they are not required for now.
   # windows-build:
