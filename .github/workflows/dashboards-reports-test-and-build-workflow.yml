@@ -55,10 +55,6 @@ jobs:
 
       - name: Get the plugin version
         run: |
-          ls
-          ls ./OpenSearch-Dashboards
-          ls ./OpenSearch-Dashboards/plugins
-          pwd
           echo "VERSION=$(jq -r '.wazuh.version' $(pwd)/OpenSearch-Dashboards/plugins/reportsDashboards/package.json)" >> $GITHUB_ENV
           echo "REVISION=$(jq -r '.wazuh.revision' $(pwd)/OpenSearch-Dashboards/plugins/reportsDashboards/package.json)" >> $GITHUB_ENV
 
