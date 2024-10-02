@@ -58,17 +58,17 @@ jobs:
           echo "VERSION=$(jq -r '.wazuh.version' $(pwd)/OpenSearch-Dashboards/plugins/reportsDashboards/package.json)" >> $GITHUB_ENV
           echo "REVISION=$(jq -r '.wazuh.revision' $(pwd)/OpenSearch-Dashboards/plugins/reportsDashboards/package.json)" >> $GITHUB_ENV
 
-      # - name: OpenSearch Dashboards Plugin Bootstrap and test
-      #   uses: nick-fields/retry@v1
-      #   with:
-      #     timeout_minutes: 30
-      #     max_attempts: 3
-      #     command: |
-      #       chown -R 1000:1000 `pwd`
-      #       cd ./OpenSearch-Dashboards/
-      #       su `id -un 1000` -c "source $NVM_DIR/nvm.sh && nvm use && node -v && yarn -v &&
-      #                            cd ./plugins/${{ env.PLUGIN_NAME }} &&
-      #                            whoami && yarn osd bootstrap --single-version=loose && yarn test --coverage"
+      - name: OpenSearch Dashboards Plugin Bootstrap and test
+        uses: nick-fields/retry@v1
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          command: |
+            chown -R 1000:1000 `pwd`
+            cd ./OpenSearch-Dashboards/
+            su `id -un 1000` -c "source $NVM_DIR/nvm.sh && nvm use && node -v && yarn -v &&
+                                 cd ./plugins/${{ env.PLUGIN_NAME }} &&
+                                 whoami && yarn osd bootstrap --single-version=loose"
 
       # - name: Upload coverage
       #   uses: codecov/codecov-action@v1
