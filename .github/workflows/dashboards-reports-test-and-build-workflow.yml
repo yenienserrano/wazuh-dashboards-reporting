@@ -59,8 +59,8 @@ jobs:
           ls ./OpenSearch-Dashboards
           ls ./OpenSearch-Dashboards/plugins
           pwd
-          echo "version=$(jq -r '.wazuh.version' $(pwd)/OpenSearch-Dashboards/plugins/reportsDashboards/package.json)" >> $GITHUB_ENV
-          echo "revision=$(jq -r '.wazuh.revision' $(pwd)/OpenSearch-Dashboards/plugins/reportsDashboards/package.json)" >> $GITHUB_ENV
+          echo "VERSION=$(jq -r '.wazuh.version' $(pwd)/OpenSearch-Dashboards/plugins/reportsDashboards/package.json)" >> $GITHUB_ENV
+          echo "REVISION=$(jq -r '.wazuh.revision' $(pwd)/OpenSearch-Dashboards/plugins/reportsDashboards/package.json)" >> $GITHUB_ENV
 
       - name: OpenSearch Dashboards Plugin Bootstrap and test
         uses: nick-fields/retry@v1
@@ -87,13 +87,13 @@ jobs:
           cd ./OpenSearch-Dashboards/
           su `id -un 1000` -c "source $NVM_DIR/nvm.sh && nvm use && node -v && yarn -v &&
                                cd ./plugins/${{ env.PLUGIN_NAME }} &&
-                               whoami && yarn build && mv -v ./build/*.zip ./build/${{ env.ARTIFACT_NAME }}-${{ env.OPENSEARCH_PLUGIN_VERSION }}.zip"
+                               whoami && yarn build && mv -v ./build/*.zip ./build/reports-dashboards_${{ env.VERSION }}-${{ env.REVISION }}_${{ inputs.reference }}.zip"
 
       - name: Upload Artifact For Linux
         uses: actions/upload-artifact@v4
         with:
-          name: dashboards-reports-linux
-          path: ./OpenSearch-Dashboards/plugins/${{ env.PLUGIN_NAME }}/build/reports-dashboards_${{ env.VERSION }}-${{ env.REVISION }}_${{ inputs.reference_report_plugins }}.zip
+          name: reports-dashboards_${{ env.VERSION }}-${{ env.REVISION }}_${{ inputs.reference }}
+          path: ./OpenSearch-Dashboards/plugins/${{ env.PLUGIN_NAME }}/build/reports-dashboards_${{ env.VERSION }}-${{ env.REVISION }}_${{ inputs.reference }}.zip
   
   # Commenting out windows and macos build jobs as they are not required for now.
   # windows-build:
