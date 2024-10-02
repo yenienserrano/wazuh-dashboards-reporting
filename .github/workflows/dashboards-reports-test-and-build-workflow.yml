@@ -1,11 +1,22 @@
 name: Test and Build OpenSearch Dashboards Reports
 
-on: [
-  pull_request, 
-  push,
-  workflow_dispatch, 
-  workflow_call
-]
+on: 
+  pull_request: 
+  push:
+  workflow_dispatch: 
+    inputs:
+      reference_report_plugins:
+        type: string
+        description: 'Branch/tag/commit to build the report plugin'
+        required: true
+        default: 'master'
+  workflow_call:
+    inputs:
+      reference_report_plugins:
+        type: string
+        description: 'Branch/tag/commit to build the report plugin'
+        required: true
+        default: 'master'
 
 env:
   PLUGIN_NAME: reportsDashboards
